@@ -26,6 +26,6 @@
      <name>garimah</name>
      <url>https://maven.pkg.github.com/garimah/test</url>
    </repository>
-</distributionManagement
+         </distributionManagement>
 
 </project>
