@@ -20,5 +20,12 @@
             </plugin>
          </plugins>
          </build>
+         <distributionManagement>
+   <repository>
+     <id>github</id>
+     <name>garimah</name>
+     <url>https://maven.pkg.github.com/garimah/test</url>
+   </repository>
+</distributionManagement
 
 </project>
