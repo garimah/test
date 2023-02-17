@@ -1,0 +1,32 @@
+name: Create branch
+
+on:
+  workflow_dispatch:
+    manual-run:
+      default: 'true'
+      description: Create branch
+      required: true
+    inputs:
+      releasebranch:
+        required: true
+        type: string  
+
+
+jobs:
+  create-release-branch-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print inputs
+      run: echo "${{ inputs.releasebranch }}"
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+       repository: garimah/test
+       ref: main
+    - name: Pull
+      run: git pull
+    - name: Create branch
+      run: git checkout -b "${{ inputs.releasebranch }}"
+    - name: Push branch
+      run: git push -u origin "${{ inputs.releasebranch }}"
