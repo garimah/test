@@ -36,5 +36,6 @@ jobs:
           mvn versions:set -DnewVersion=2.0-SNAPSHOT --file test1/pom.xml
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
+          git add test1/pom.xml
           git commit -m "prepare for next dev cycle"
           git push origin main  
