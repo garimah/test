@@ -2,7 +2,6 @@ on: create
 jobs:
   job1:
     
-    if: ${{ contains(GITHUB_REF, 'refs/heads/releases/') }}
     runs-on: ubuntu-latest
 
     steps:
