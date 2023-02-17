@@ -1,7 +1,8 @@
 on: create
 jobs:
   job1:
-    if: ${{ contains(github.ref, 'refs/heads/releases/sprint') }}
+    
+    if: ${{ contains(GITHUB_REF, 'refs/heads/releases/') }}
     runs-on: ubuntu-latest
 
     steps:
