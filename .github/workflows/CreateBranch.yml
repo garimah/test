@@ -30,3 +30,9 @@ jobs:
       run: git checkout -b "${{ inputs.releasebranch }}"
     - name: Push branch
       run: git push -u origin "${{ inputs.releasebranch }}"
+    - name: update version
+      run: 
+          |
+          mvn versions:set -DnewVersion=2.0-SNAPSHOT --file test1/pom.xml
+          git commit -m "prepare for next dev cycle"
+          git push origin main  
