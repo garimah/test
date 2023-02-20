@@ -48,7 +48,7 @@ jobs:
     - name: update version
       run: 
           |
-          mvn versions:set -DnewVersion=3.0-SNAPSHOT --file test1/pom.xml
+          mvn versions:set -DnewVersion=3.{{ $vars.SPRINT }}.0-SNAPSHOT --file test1/pom.xml
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git add test1/pom.xml
