@@ -13,31 +13,8 @@ on:
 
 
 jobs:
-  update-version:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Print inputs
-      run:  echo "${{ inputs.releasebranch }}"
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-       repository: garimah/test
-       ref: main
-    - name: Pull
-      run: git pull
-    - name: update version
-      run: 
-          |
-          mvn versions:set -DnewVersion=2.0-SNAPSHOT --file test1/pom.xml
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git add test1/pom.xml
-          git commit -m "prepare for next dev cycle"
-          git push -u origin main 
-    
   create-release-branch-test:
-    needs: update-version
+    
     runs-on: ubuntu-latest
     steps:
     - name: Print inputs
@@ -53,4 +30,30 @@ jobs:
       run: git checkout -b "${{ inputs.releasebranch }}"
     - name: Push branch
       run: git push -u origin "${{ inputs.releasebranch }}"
+  
+  update-version:
+    needs: create-release-branch-test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print inputs
+      run:  echo "${{ inputs.releasebranch }}"
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+       repository: garimah/test
+       ref: main
+    - name: Pull
+      run: git pull
+    - name: update version
+      run: 
+          |
+          mvn versions:set -DnewVersion=3.0-SNAPSHOT --file test1/pom.xml
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add test1/pom.xml
+          git commit -m "prepare for next dev cycle"
+          git push -u origin main 
+    
+  
    
