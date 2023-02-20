@@ -9,7 +9,7 @@ on:
       default: 'true'
       description: Run scan manually
       required: true
-   push:
+  push:
     branches:
       - main
       - 'releases/sprint**'   
