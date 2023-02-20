@@ -37,7 +37,7 @@ jobs:
           git push -u origin main 
     
   create-release-branch-test:
-    needs: update version
+    needs: update-version
     runs-on: ubuntu-latest
     steps:
     - name: Print inputs
