@@ -12,11 +12,11 @@ on:
    push:
     branches:
       - main
-      - 'releases/sprint${{ vars.SPRINT }}'   
+      - 'releases/sprint**'   
 
 jobs:
   build:
-
+    if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
