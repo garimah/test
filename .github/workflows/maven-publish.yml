@@ -23,12 +23,15 @@ jobs:
       packages: write
     env: 
       SPRINT_TAG: sprint
+      CURRENT_SPRINT_BRANCH: 'refs/heads/releases/sprint'
     steps:
       - name: Print Branch name
-        run: echo ${{ github.ref }} and ${{ github.event_name }}
+        run: |
+          echo ${{ github.ref }} and ${{ github.event_name }}
+          echo "CURRENT_SPRINT_BRANCH=refs/heads/releases/sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
       
       - name: Check if release branch
-        if: ${{ github.ref == 'refs/heads/releases/sprint${{ vars.SPRINT }}' }}
+        if: ${{ github.ref == env.CURRENT_SPRINT_BRANCH }}
         run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
         
       - name: Check if main
