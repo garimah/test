@@ -30,12 +30,12 @@ jobs:
       shell: bash
       run: |
             echo "${{ github.ref }}"
-            if ${{ github.ref == '*releases/sprint${{ vars.SPRINT }}*' }}; then 
+            if ${{ github.ref  == 'refs/heads/main' }}; then 
              echo "${{ github.ref }}"
-             echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
-            elif ${{ github.ref  == 'refs/heads/main' }}; then
+             echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
+            elif ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}; then
              echo "${{ github.ref  }}"
-             echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV 
+             echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV 
             else 
               echo "${{ github.ref  }}"
             fi   
