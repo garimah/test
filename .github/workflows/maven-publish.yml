@@ -25,7 +25,7 @@ jobs:
       SPRINT_TAG: sprint
     steps:
       - name: Check if main
-        if: ${{ github.ref == 'master' || github.ref == 'main'}}
+        if: ${{ github.ref == 'master' }} || $ {{ github.ref == 'main'}}
         run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
       
       - name: Check if release branch
