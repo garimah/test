@@ -28,11 +28,11 @@ jobs:
     steps:
     - name: Calculate sprint tag
       run: |
-            if [ ${{ github.ref  == 'releases/sprint${{ vars.SPRINT }}' ]
+            if ${{ github.ref  == 'releases/sprint${{ vars.SPRINT }}' 
             then 
              echo "${{ github.ref  }}"
              echo "{SPRINT_TAG}={sprint${{ vars.SPRINT }}}" >> $GITHUB_ENV
-            elif [ ${{ github.ref  == 'main' ]
+            elif  ${{ github.ref  == 'main' 
             then 
              echo "${{ github.ref  }}"
              echo "{SPRINT_TAG}={sprint${{ vars.NEXT_SPRINT }}}" >> $GITHUB_ENV 
