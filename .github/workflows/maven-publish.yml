@@ -28,7 +28,7 @@ jobs:
         run: echo ${{ github.ref }} and ${{ github.event_name }}
       
       - name: Check if release branch
-        if: ${{ github.ref == 'refs/heads/releases/sprint${{ vars.SPRINT }}' }}
+        if: ${{ github.ref == 'refs/heads/releases/sprint67' }}
         run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
         
       - name: Check if main
