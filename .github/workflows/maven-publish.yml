@@ -26,19 +26,25 @@ jobs:
 
    
     steps:
-    - name: Calculate sprint tag
-      shell: bash
-      run: |
-            echo "${{ github.ref }}"
-            if ${{ github.ref  == 'refs/heads/main' }}; then 
-             echo "${{ github.ref }}"
-             echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
-            elif ${{ contains( 'releases/sprint${{ vars.SPRINT }}', github.ref ) }}; then
-             echo "${{ github.ref  }}"
-             echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV 
-            else 
-              echo "${{ github.ref  }}"
-            fi   
+    - name: If main/master
+    - if: ${{ github.ref == 'master' }} || ${{ github.ref == 'main' }}
+      run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
+    - name: If current Sprint 
+    - if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
+      run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
+#     - name: Calculate sprint tag
+#       shell: bash
+#       run: |
+#             echo "${{ github.ref }}"
+#             if ${{ github.ref  == 'refs/heads/main' }}; then 
+#              echo "${{ github.ref }}"
+#              echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
+#             elif ${{ contains( 'releases/sprint${{ vars.SPRINT }}', github.ref ) }}; then
+#              echo "${{ github.ref  }}"
+#              echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV 
+#             else 
+#               echo "${{ github.ref  }}"
+#             fi   
     - name: Print sprinttag
       run: echo "${{ env.SPRINT_TAG }}"
     - uses: actions/checkout@v3
