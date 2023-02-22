@@ -26,7 +26,7 @@ jobs:
 
    
     steps:
-    - name: If main/master
+    - name: If main or master
     - if: ${{ github.ref == 'master' }} || ${{ github.ref == 'main' }}
       run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
     - name: If current Sprint 
