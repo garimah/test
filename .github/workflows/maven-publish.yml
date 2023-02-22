@@ -29,7 +29,7 @@ jobs:
         run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
       
       - name: Check if release branch
-        if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
+        if: ${{ github.ref == 'refs/heads/releases/sprint${{ vars.SPRINT }}' }}
         run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
       
       - name: Print sprinttag
