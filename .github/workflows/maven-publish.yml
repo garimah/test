@@ -27,10 +27,10 @@ jobs:
    
     steps:
     - name: If main or master
-    - if: ${{ github.ref == 'master' }} || ${{ github.ref == 'main' }}
+      if: ${{ github.ref == 'master' }} || ${{ github.ref == 'main' }}
       run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
     - name: If current Sprint 
-    - if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
+      if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
       run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
 #     - name: Calculate sprint tag
 #       shell: bash
