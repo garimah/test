@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' || github.ref == 'main' || github.ref == 'master'  }}
+    if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }} || ${{ github.ref == 'main' }} || ${{ github.ref == 'master'  }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
