@@ -22,14 +22,14 @@ jobs:
       contents: read
       packages: write
     env: 
-      SPRINT_TAG: sprint 
-
-   
+      SPRINT_TAG: sprint
     steps:
-      - if: ${{ github.ref == 'master' }} || ${{ github.ref == 'main' }}
+      - name: Check if main
+        if: ${{ github.ref == 'master' }} || ${{ github.ref == 'main' }}
         run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV
       
-      - if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
+      - name: Check if release branch
+        if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }}
         run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
       
       - name: Print sprinttag
