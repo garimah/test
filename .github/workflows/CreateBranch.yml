@@ -49,9 +49,11 @@ jobs:
       run: 
           |
           mvn versions:set -DnewVersion=3.'${{ vars.SPRINT }}'.0-SNAPSHOT --file test1/pom.xml
+          echo "${{ inputs.releasebranch }}" > 'version'
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git add test1/pom.xml
+          git add version
           git commit -m "prepare for next dev cycle"
           git push -u origin main 
     
