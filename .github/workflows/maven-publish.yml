@@ -12,22 +12,21 @@ on:
   push:
     branches:
       - main
-      - 'releases/**'   
+      - 'releases/**' 
+      - master
 
 jobs:
   build:
-    if: ${{ github.ref == 'releases/sprint${{ vars.CURRENT_SPRINT }}' }} || ${{ github.ref == 'releases/sprint${{ vars.PREVIOUS_SPRINT }}' }} || || ${{ github.ref == 'releases/sprint${{ vars.PREVIOUS_SPRINT }}' }} || ${{ github.ref == 'main' }} || ${{ github.ref == 'master'  }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     env: 
-      SPRINT_TAG: sprint
+      SPRINT_TAG: ''
     steps:
       - name: Print Branch name
         run: |
-          echo ${{ github.ref }} and ${{ github.event_name }} and ${{ vars.PREVIOUS_SPRINT }} and ${{ vars.CURRENT_SPRINT }} and ${{ vars.PREVIOUS_SPRINT }} 
-      
+          echo ${{ github.ref }} and ${{ github.event_name }} 
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
       - uses: actions/checkout@v3
