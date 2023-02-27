@@ -27,9 +27,9 @@ jobs:
     - name: Pull
       run: git pull
     - name: Create branch
-      run: git checkout -b "${{ inputs.releasebranch }}"
+      run: git checkout -b "releases/sprint${{ inputs.releasebranch }}"
     - name: Push branch
-      run: git push -u origin "${{ inputs.releasebranch }}"
+      run: git push -u origin "releases/sprint${{ inputs.releasebranch }}"
   
   update-version:
     needs: create-release-branch-test
@@ -48,7 +48,7 @@ jobs:
     - name: update version
       run: 
           |
-          mvn versions:set -DnewVersion=3.'${{ vars.SPRINT }}'.0-SNAPSHOT --file test1/pom.xml
+          mvn versions:set -DnewVersion=3.'${{ inputs.releasebranch }}'.0-SNAPSHOT --file test1/pom.xml
           echo "${{ inputs.releasebranch }}" > 'version'
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
