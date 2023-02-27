@@ -26,22 +26,7 @@ jobs:
     steps:
       - name: Print Branch name
         run: |
-          echo ${{ github.ref }} and ${{ github.event_name }} and ${{ vars.PREVIOUS_SPRINT }} and ${{ vars.CURRENT_SPRINT }} and ${{ vars.PREVIOUS_SPRINT }}
-          
-      - name: Check if previous   
-        if: contains(github.ref, 'refs/heads/releases/sprint${{ vars.PREVIOUS_SPRINT }}')
-        run: |
-          echo "SPRINT_TAG=sprint${{ vars.PREVIOUS_SPRINT }}" >> $GITHUB_ENV
-        
-      - name: Check if release branch
-        if: contains(github.ref,'refs/heads/releases/sprint${{ vars.CURRENT_SPRINT }}'
-        run: | 
-         echo "SPRINT_TAG=sprint${{ vars.CURRENT_SPRINT }}" >> $GITHUB_ENV
-        
-      - name: Check if main
-        if: contains(github.ref, 'refs/heads/master') || contains(github.ref, 'refs/heads/main')
-        run: |
-         echo "SPRINT_TAG=sprintCurrent" >> $GITHUB_ENV   
+          echo ${{ github.ref }} and ${{ github.event_name }} and ${{ vars.PREVIOUS_SPRINT }} and ${{ vars.CURRENT_SPRINT }} and ${{ vars.PREVIOUS_SPRINT }} 
       
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
@@ -55,5 +40,12 @@ jobs:
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
+      - name: Actual build
+        run: |
+           cat version
+           value=`cat version`
+           echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
+      - name: Print sprinttag
+        run: echo "${{ env.SPRINT_TAG }}"     
 
 
