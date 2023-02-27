@@ -54,7 +54,7 @@ jobs:
           git config user.email "<>"
           git add test1/pom.xml
           git add version
-          git commit -m "prepare for next dev cycle"
+          git commit -m "prepare for next dev cycle [[skip ci]"
           git push -u origin main 
     
   
