@@ -14,7 +14,6 @@ on:
 
 jobs:
   create-release-branch-test:
-    
     runs-on: ubuntu-latest
     steps:
     - name: Print inputs
@@ -33,8 +32,9 @@ jobs:
   
   update-version:
     needs: create-release-branch-test
+    env: 
+     NEXT_VERSION: ${{ inputs.releasebranch }}
     runs-on: ubuntu-latest
-
     steps:
     - name: Print inputs
       run:  echo "${{ inputs.releasebranch }}"
@@ -48,8 +48,10 @@ jobs:
     - name: update version
       run: 
           |
-          mvn versions:set -DnewVersion=3.'${{ inputs.releasebranch }}'.0-SNAPSHOT --file test1/pom.xml
-          echo "${{ inputs.releasebranch }}" > 'version'
+          nextversion=`expr ${{ inputs.releasebranch }} + 1`
+          echo $nextversion
+          mvn versions:set -DnewVersion=3.'$nextversion'.0-SNAPSHOT --file test1/pom.xml
+          echo "$nextversion" > 'version'
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git add test1/pom.xml
