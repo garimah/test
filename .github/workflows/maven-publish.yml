@@ -16,27 +16,29 @@ on:
 
 jobs:
   build:
-    if: ${{ github.ref == 'releases/sprint${{ vars.SPRINT }}' }} || ${{ github.ref == 'main' }} || ${{ github.ref == 'master'  }}
+    if: ${{ github.ref == 'releases/sprint${{ vars.CURRENT_SPRINT }}' }} || ${{ github.ref == 'releases/sprint${{ vars.PREVIOUS_SPRINT }}' }} || || ${{ github.ref == 'releases/sprint${{ vars.PREVIOUS_SPRINT }}' }} || ${{ github.ref == 'main' }} || ${{ github.ref == 'master'  }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     env: 
       SPRINT_TAG: sprint
-      CURRENT_SPRINT_BRANCH: 'refs/heads/releases/sprint'
     steps:
       - name: Print Branch name
         run: |
           echo ${{ github.ref }} and ${{ github.event_name }}
-          echo "CURRENT_SPRINT_BRANCH=refs/heads/releases/sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
-      
+          
+      - name: Check if previous   
+        if: ${{ github.ref == 'releases/sprint${{ vars.PREVIOUS_SPRINT }}' }}
+        run: echo "SPRINT_TAG=sprint${{ vars.PREVIOUS_SPRINT }}" >> $GITHUB_ENV
+        
       - name: Check if release branch
-        if: ${{ github.ref == env.CURRENT_SPRINT_BRANCH }}
-        run: echo "SPRINT_TAG=sprint${{ vars.SPRINT }}" >> $GITHUB_ENV
+        if: ${{ github.ref == 'releases/sprint${{ vars.CURRENT_SPRINT }}' }}
+        run: echo "SPRINT_TAG=sprint${{ vars.CURRENT_SPRINT }}" >> $GITHUB_ENV
         
       - name: Check if main
         if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'}}
-        run: echo "SPRINT_TAG=sprint${{ vars.NEXT_SPRINT }}" >> $GITHUB_ENV   
+        run: echo "SPRINT_TAG=sprintCurrent" >> $GITHUB_ENV   
       
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
