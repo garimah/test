@@ -50,7 +50,7 @@ jobs:
           |
           nextversion=`expr ${{ inputs.releasebranch }} + 1`
           echo $nextversion
-          mvn versions:set -DnewVersion=3.'$nextversion'.0-SNAPSHOT --file test1/pom.xml
+          mvn versions:set -DnewVersion=3."$nextversion".0-SNAPSHOT --file test1/pom.xml
           echo "$nextversion" > 'version'
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
