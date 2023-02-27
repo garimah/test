@@ -29,15 +29,15 @@ jobs:
           echo ${{ github.ref }} and ${{ github.event_name }} and ${{ vars.PREVIOUS_SPRINT }} and ${{ vars.CURRENT_SPRINT }} and ${{ vars.PREVIOUS_SPRINT }}
           
       - name: Check if previous   
-        if: contains(github.ref, 'refs/heads/releases/sprint${{ vars.PREVIOUS_SPRINT }}')
+        if: contains(github.ref, 'sprint${{ vars.PREVIOUS_SPRINT }}')
         run: echo "SPRINT_TAG=sprint${{ vars.PREVIOUS_SPRINT }}" >> $GITHUB_ENV
         
       - name: Check if release branch
-        if: contains(github.ref,'refs/heads/releases/sprint${{ vars.CURRENT_SPRINT }}'
+        if: contains(github.ref,'sprint${{ vars.CURRENT_SPRINT }}'
         run: echo "SPRINT_TAG=sprint${{ vars.CURRENT_SPRINT }}" >> $GITHUB_ENV
         
       - name: Check if main
-        if: contains(github.ref, 'refs/heads/master' || github.ref == 'refs/heads/main')
+        if: contains(github.ref, 'refs/heads/master') || contains(github.ref, 'refs/heads/main')
         run: echo "SPRINT_TAG=sprintCurrent" >> $GITHUB_ENV   
       
       - name: Print sprinttag
