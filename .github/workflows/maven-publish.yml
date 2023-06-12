@@ -37,7 +37,7 @@ jobs:
            cat version
            value=`cat version`
            echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
-           curl -XPOST -u "garimah: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" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/garimah/rnd/dispatches --data '{"event_type": "build_application"}'
+           curl -XPOST -u "garimah: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" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/garimah/rnd/dispatches --data '{"event_type": "build_application"}'
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
 
