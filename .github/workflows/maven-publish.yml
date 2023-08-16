@@ -24,6 +24,9 @@ jobs:
     env: 
       SPRINT_TAG: ''
     steps:
+      - uses: actions/checkout@v3
+          with:
+            ref: ${{ github.event.client_payload.ref }}
       - name: Print Branch name
         run: |
           echo ${{ github.ref }} and ${{ github.event_name }}
