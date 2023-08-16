@@ -30,15 +30,18 @@ jobs:
       - name: Print commit details
         run: |
           echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[0].message }} and ${{ github.event.commits[0].author.email }}
-          echo and ${{ github.event.commits[0].author.username }} and ${{ github.event.commits[0].author.name }}
-      # - name: Print commit details
-      #   run: |
-      #     echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[1].message }} and ${{ github.event.commits[1].author.email }}
-      #     echo and ${{ github.event.commits[1].author.username }} and ${{ github.event.commits[1].author.name }}
-      # - name: Print commit details
-      #   run: |
-      #     echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[2].message }} and ${{ github.event.commits[2].author.email }}
-      #     echo and ${{ github.event.commits[2].author.username }} and ${{ github.event.commits[2].author.name }}    
+          echo and ${{ github.event.commits[0].author.username }} and ${{ github.event.commits[0].author.name }} and ${{ github.event.commits[0].modified }}
+          echo and ${{ github.event.commits[0].url }} and ${{ github.event.commits[0].timestamp }} ${{ github.event.commits[0].added }}
+       - name: Print commit details
+         run: |
+           echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[1].message }} and ${{ github.event.commits[1].author.email }}
+           echo and ${{ github.event.commits[1].author.username }} and ${{ github.event.commits[1].author.name }} and ${{ github.event.commits[1].modified }}
+           echo and ${{ github.event.commits[1].url }} and ${{ github.event.commits[1].timestamp }} ${{ github.event.commits[1].added }}
+       - name: Print commit details
+         run: |
+           echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[2].message }} and ${{ github.event.commits[2].author.email }}
+           echo and ${{ github.event.commits[2].author.username }} and ${{ github.event.commits[2].author.name }} and ${{ github.event.commits[2].modified }}
+           echo and ${{ github.event.commits[2].url }} and ${{ github.event.commits[2].timestamp }} ${{ github.event.commits[2].added }}
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
       - uses: actions/checkout@v3
