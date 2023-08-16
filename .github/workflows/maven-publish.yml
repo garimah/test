@@ -30,15 +30,15 @@ jobs:
       - name: Print commit details
         run: |
           echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[0].message }} and ${{ github.event.commits[0].author.email }}
-          and ${{ github.event.commits[0].author.username }} and ${{ github.event.commits[0].author.name }}
+          echo and ${{ github.event.commits[0].author.username }} and ${{ github.event.commits[0].author.name }}
       # - name: Print commit details
       #   run: |
       #     echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[1].message }} and ${{ github.event.commits[1].author.email }}
-      #     and ${{ github.event.commits[1].author.username }} and ${{ github.event.commits[1].author.name }}
+      #     echo and ${{ github.event.commits[1].author.username }} and ${{ github.event.commits[1].author.name }}
       # - name: Print commit details
       #   run: |
       #     echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[2].message }} and ${{ github.event.commits[2].author.email }}
-      #     and ${{ github.event.commits[2].author.username }} and ${{ github.event.commits[2].author.name }}    
+      #     echo and ${{ github.event.commits[2].author.username }} and ${{ github.event.commits[2].author.name }}    
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
       - uses: actions/checkout@v3
