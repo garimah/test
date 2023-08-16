@@ -44,10 +44,10 @@ jobs:
            echo and ${{ github.event.commits[2].url }} and ${{ github.event.commits[2].timestamp }} ${{ github.event.commits[2].added }}
       - name: Print commit details
         run: |
-            echo Head commit - ${{ github.event.head_commit.message }}
-            echo commit 0 - ${{ github.event.commits[0].message }} and ${{ github.event.commits[0].author.username }} and ${{ github.event.commits[0].url }} and ${{ github.event.commits[0].timestamp }}
-            echo commit 1 - ${{ github.event.commits[1].message }} and ${{ github.event.commits[1].author.username }} and ${{ github.event.commits[1].url }} and ${{ github.event.commits[1].timestamp }}
-            echo commit 2 - ${{ github.event.commits[2].message }} and ${{ github.event.commits[2].author.username }} and ${{ github.event.commits[2].url }} and ${{ github.event.commits[2].timestamp }}
+          value=`cat version`
+          echo "[sprint$value] ${{ github.event.commits[0].message }} [ ${{ github.event.commits[0].author.username }} ] ${{ github.event.commits[0].timestamp }} and ${{ github.event.commits[0].url }}"
+#            echo " ${{ github.event.commits[1].message }} [ ${{ github.event.commits[1].author.username }} ] ${{ github.event.commits[1].timestamp }} and ${{ github.event.commits[1].url }}"
+#            echo " ${{ github.event.commits[2].message }} [ ${{ github.event.commits[2].author.username }} ] ${{ github.event.commits[2].timestamp }} and ${{ github.event.commits[2].url }}"
 
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
