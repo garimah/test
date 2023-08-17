@@ -57,7 +57,6 @@ jobs:
 
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
-      
       - id: setcommitlog
         run: |
           cat version
@@ -71,7 +70,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Call repository dispatch for kpd-devops
       - name: send commitlog
         run: |
            curl -L \
