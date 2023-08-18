@@ -54,7 +54,7 @@ jobs:
         run: |
           value=`cat version`
           message=`echo ${{ github.event.commits[0].message }}`
-          message=`echo $message | tr -d '\n' | tr -d '\r'`
+          # message=`echo $message | tr -d '\n' | tr -d '\r'`
           echo "$message"
           echo "[sprint$value] $message [${{ github.event.commits[0].author.username }}] ${{ github.event.commits[0].timestamp }}] ${{ github.event.commits[0].url }}"
 #            echo " ${{ github.event.commits[1].message }} [ ${{ github.event.commits[1].author.username }} ] ${{ github.event.commits[1].timestamp }} and ${{ github.event.commits[1].url }}"
@@ -69,7 +69,7 @@ jobs:
           echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
           echo "SPRINT_TAG=sprint$value" >> $GITHUB_OUTPUT
           message=`echo ${{ github.event.commits[0].message }}`
-          message=`echo $message | tr -d '\n' | tr -d '\r'`
+          # message=`echo $message | tr -d '\n' | tr -d '\r'`
           echo "$message"
           echo "commitlog=[${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]" >> $GITHUB_OUTPUT
       
