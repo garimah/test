@@ -70,6 +70,7 @@ jobs:
           echo "$message"
           echo "commitlog=[${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]" >> $GITHUB_OUTPUT
       
+
          
   pushcommitlog:
     needs: build
