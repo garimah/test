@@ -52,7 +52,7 @@ jobs:
       - name: Print commit details
         run: |
           value=`cat version`
-          message=`echo ${{ github.event.commits[0].message }} | tr -d '\n' | tr -d '\r'`
+          message=`echo ${{ github.event.head_commit.message }}`
           echo "[sprint$value] $message [${{ github.event.commits[0].author.username }}] ${{ github.event.commits[0].timestamp }}] ${{ github.event.commits[0].url }}"
 #            echo " ${{ github.event.commits[1].message }} [ ${{ github.event.commits[1].author.username }} ] ${{ github.event.commits[1].timestamp }} and ${{ github.event.commits[1].url }}"
 #            echo " ${{ github.event.commits[2].message }} [ ${{ github.event.commits[2].author.username }} ] ${{ github.event.commits[2].timestamp }} and ${{ github.event.commits[2].url }}"
