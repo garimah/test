@@ -34,29 +34,12 @@ jobs:
       - name: Print Branch name
         run: |
           echo ${{ github.ref }} and ${{ github.event_name }}
-      # - name: Print commit details
-      #   run: |
-      #     echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[0].message }} and ${{ github.event.commits[0].author.email }}
-      #     echo and ${{ github.event.commits[0].author.username }} and ${{ github.event.commits[0].author.name }} and ${{ github.event.commits[0].modified }}
-      #     echo and ${{ github.event.commits[0].url }} and ${{ github.event.commits[0].timestamp }} ${{ github.event.commits[0].added }}
-      # - name: Print commit details
-      #   run: |
-      #      echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[1].message }} and ${{ github.event.commits[1].author.email }}
-      #      echo and ${{ github.event.commits[1].author.username }} and ${{ github.event.commits[1].author.name }} and ${{ github.event.commits[1].modified }}
-      #      echo and ${{ github.event.commits[1].url }} and ${{ github.event.commits[1].timestamp }} ${{ github.event.commits[1].added }}
-      # - name: Print commit details
-      #   run: |
-      #      echo ${{ github.event.head_commit.message }} and ${{ github.event.commits[2].message }} and ${{ github.event.commits[2].author.email }}
-      #      echo and ${{ github.event.commits[2].author.username }} and ${{ github.event.commits[2].author.name }} and ${{ github.event.commits[2].modified }}
-      #      echo and ${{ github.event.commits[2].url }} and ${{ github.event.commits[2].timestamp }} ${{ github.event.commits[2].added }}
       - name: Print commit details
         run: |
           value=`cat version`
-          echo "${${{ github.event.head_commit.message }}//[$'\n\r']/}" >> message
+          message=${${{ github.event.head_commit.message }}//[$'\n\r']/}
           commitlog=`echo [${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
           echo "commitlog=$commitlog"
-#            echo " ${{ github.event.commits[1].message }} [ ${{ github.event.commits[1].author.username }} ] ${{ github.event.commits[1].timestamp }} and ${{ github.event.commits[1].url }}"
-#            echo " ${{ github.event.commits[2].message }} [ ${{ github.event.commits[2].author.username }} ] ${{ github.event.commits[2].timestamp }} and ${{ github.event.commits[2].url }}"
 
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
@@ -66,7 +49,7 @@ jobs:
           value=`cat version`
           echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
           echo "SPRINT_TAG=sprint$value" >> $GITHUB_OUTPUT
-          echo "${${{ github.event.head_commit.message }}//[$'\n\r']/}" >> message
+          message=${${{ github.event.head_commit.message }}//[$'\n\r']/}
           commitlog=`echo [${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
           echo "commitlog=$commitlog" >> $GITHUB_OUTPUT
       
