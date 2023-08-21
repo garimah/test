@@ -40,7 +40,7 @@ jobs:
       - id: get-log
         run: |
           log=$(echo ${{ github.event.head_commit.message }} | cut -d\n -f2)
-          echo "log=$log" >> $GITHUB_OUTPUT
+          echo "log=$log END OF MSG" >> $GITHUB_OUTPUT
 
       - name: Print commit details
         run: |
