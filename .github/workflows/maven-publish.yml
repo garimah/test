@@ -65,7 +65,7 @@ jobs:
           value=`cat version`
           echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
           echo "SPRINT_TAG=sprint$value" >> $GITHUB_OUTPUT
-          message=`echo ${{ github.event.commits[0].message }} | tr -d '\n' | tr -d '\r'`
+          message=`echo ${{ github.event.head_commit.message }}`
           echo "commitlog=[${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]" >> $GITHUB_OUTPUT
       
 
