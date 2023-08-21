@@ -38,7 +38,6 @@ jobs:
         run: |
           value=`cat version`
           message=`${${{ github.event.head_commit.message }}//$'\n'/}`
-          # message=$(sed -nE '1 s/# *(.*)/\1/p' <<< echo ${{ github.event.head_commit.message }})
           commitlog=`echo [${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
           echo "commitlog=$commitlog"
 
@@ -54,8 +53,7 @@ jobs:
           # message=$(sed -nE '1 s/# *(.*)/\1/p' <<< ${{ github.event.head_commit.message }})
           commitlog=`echo [${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
           echo "commitlog=$commitlog" >> $GITHUB_OUTPUT
-      
-
+  
          
   pushcommitlog:
     needs: build
