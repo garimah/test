@@ -39,7 +39,7 @@ jobs:
         run: echo "${{ env.SPRINT_TAG }}"
       - id: get-log
         run: |
-          log=$(echo ${{ github.event.head_commit.message }} END OF MSG" | cut -d\n -f2)
+          log=$(echo ${{ github.event.head_commit.message }} END OF MSG | cut -d\n -f2)
           echo "log=$log" >> $GITHUB_OUTPUT
 
       - name: Print commit details
