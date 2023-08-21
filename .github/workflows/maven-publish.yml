@@ -37,25 +37,42 @@ jobs:
 
       - name: Print sprinttag
         run: echo "${{ env.SPRINT_TAG }}"
-      - id: get-log
-        run: |
-          log=$(echo ${{ github.event.head_commit.message }} END OF MSG | cut -d\n -f2)
-          echo "log=$log" >> $GITHUB_OUTPUT
 
       - name: Print commit details
         run: |
-          value=`cat version`
-          commitlog=`echo [${{ github.event.commits[0].timestamp }}] ${{steps.get-log.outputs.log}} [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
-          echo "commitlog=$commitlog"    
-
+            value=`cat version`
+            message=`echo ${{ github.event.commits[0].message }} | tr -d '\n' | tr -d '\r'`
+            echo "[sprint$value] $message [${{ github.event.commits[0].author.username }}] ${{ github.event.commits[0].timestamp }}] ${{ github.event.commits[0].url }}"
       - id: setcommitlog
         run: |
-          cat version
-          value=`cat version`
-          echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
-          echo "SPRINT_TAG=sprint$value" >> $GITHUB_OUTPUT
-          commitlog=`echo [${{ github.event.commits[0].timestamp }}] ${{steps.get-log.outputs.log}} [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
-          echo "commitlog=$commitlog" >> $GITHUB_OUTPUT
+            cat version
+            value=`cat version`
+            echo "SPRINT_TAG=sprint$value" >> $GITHUB_OUTPUT
+            message=`echo ${{ github.event.commits[0].message }} | tr -d '\n' | tr -d '\r'`
+            echo "commitlog=[${{ github.event.commits[0].timestamp }}] $message [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]" >> $GITHUB_OUTPUT
+
+        
+      # - id: get-log
+      #   run: |
+      #     log=$(echo ${{ github.event.head_commit.message }} END OF MSG | cut -d\n -f2)
+      #     echo "log=$log" >> $GITHUB_OUTPUT
+
+      # - name: Print commit details
+      #   run: |
+      #     value=`cat version`
+      #     commitlog=`echo [${{ github.event.commits[0].timestamp }}] ${{steps.get-log.outputs.log}} [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
+      #     echo "commitlog=$commitlog"    
+
+      # - id: setcommitlog
+      #   run: |
+      #     cat version
+      #     value=`cat version`
+      #     echo "SPRINT_TAG=sprint$value" >> $GITHUB_ENV
+      #     echo "SPRINT_TAG=sprint$value" >> $GITHUB_OUTPUT
+      #     commitlog=`echo [${{ github.event.commits[0].timestamp }}] ${{steps.get-log.outputs.log}} [${{ github.event.commits[0].author.username }}] [${{ github.event.commits[0].url }}]`
+      #     echo "commitlog=$commitlog" >> $GITHUB_OUTPUT
+
+      
   
          
   pushcommitlog:
