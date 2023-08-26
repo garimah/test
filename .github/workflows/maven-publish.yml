@@ -41,7 +41,7 @@ jobs:
       - name: Print commit details
         run: |
             value=`cat version`
-            message=`echo github.event.commits[0].message END OF LOG | tr -d "\n" | tr -d "\r"`
+            message=`echo "{{github.event.commits[0].message}}" END OF LOG | tr -d "\n" | tr -d "\r"`
             echo "[sprint$value] $message [${{ github.event.commits[0].author.username }}] ${{ github.event.commits[0].timestamp }}] ${{ github.event.commits[0].url }}"
       - id: setcommitlog
         run: |
