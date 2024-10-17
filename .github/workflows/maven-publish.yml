@@ -5,6 +5,13 @@ name: Maven Package
 
 on:
   workflow_dispatch:
+    inputs:
+      type:
+        description: "Asset type (mfe)"
+        required: true
+        type: string
+        options:
+          - mfe
     manual-run:
       default: 'true'
       description: Run scan manually
